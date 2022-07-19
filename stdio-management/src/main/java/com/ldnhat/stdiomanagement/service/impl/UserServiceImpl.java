@@ -2,6 +2,7 @@ package com.ldnhat.stdiomanagement.service.impl;
 
 import com.ldnhat.stdiomanagement.dto.UserDto;
 import com.ldnhat.stdiomanagement.entity.UserEntity;
+import com.ldnhat.stdiomanagement.exception.ResourceNotFoundException;
 import com.ldnhat.stdiomanagement.repository.UserRepository;
 import com.ldnhat.stdiomanagement.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto edit(UserDto userDto, Long id) {
         UserEntity updateUser = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("id not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
 
         updateUser.setName(userDto.getName());
         updateUser.setSurname(userDto.getSurname());
@@ -62,13 +63,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Long id) {
         UserEntity userEntity = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("id not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
         userRepository.delete(userEntity);
     }
 
     @Override
     public UserEntity findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("id not found"));
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
     }
 
     public UserDto mapToDto(UserEntity userEntity){
