@@ -1,5 +1,6 @@
 package com.ldnhat.stdiomanagement.controller;
 
+import com.ldnhat.stdiomanagement.dto.UserDto;
 import com.ldnhat.stdiomanagement.entity.UserEntity;
 import com.ldnhat.stdiomanagement.service.UserService;
 import org.apache.catalina.User;
@@ -24,19 +25,19 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<UserEntity>> getAllUsers() throws ParseException {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity userEntity){
-        return new ResponseEntity<>(userService.save(userEntity), HttpStatus.CREATED);
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto){
+        return new ResponseEntity<>(userService.save(userDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserEntity> editUser(@RequestBody UserEntity userEntity,
+    public ResponseEntity<UserDto> editUser(@RequestBody UserDto userDto,
                                                @PathVariable("id") Long id){
-        UserEntity userResponse = userService.edit(userEntity, id);
+        UserDto userResponse = userService.edit(userDto, id);
 
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
