@@ -42,5 +42,5 @@ public class UserEntity {
     private String projectCompleted;
 
     @Column(name = "project_inprogress")
-    private String projectInprogress;
+    private String activeProject;
 }

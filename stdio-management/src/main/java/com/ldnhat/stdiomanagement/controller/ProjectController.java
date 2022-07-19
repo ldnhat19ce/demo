@@ -1,7 +1,6 @@
 package com.ldnhat.stdiomanagement.controller;
 
 import com.ldnhat.stdiomanagement.dto.ProjectDto;
-import com.ldnhat.stdiomanagement.entity.ProjectEntity;
 import com.ldnhat.stdiomanagement.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
