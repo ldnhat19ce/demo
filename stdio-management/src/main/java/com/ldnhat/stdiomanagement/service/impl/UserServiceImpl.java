@@ -4,6 +4,7 @@ import com.ldnhat.stdiomanagement.dto.UserDto;
 import com.ldnhat.stdiomanagement.entity.UserEntity;
 import com.ldnhat.stdiomanagement.exception.ResourceNotFoundException;
 import com.ldnhat.stdiomanagement.mapper.UserMapper;
+import com.ldnhat.stdiomanagement.repository.ProjectRepository;
 import com.ldnhat.stdiomanagement.repository.UserRepository;
 import com.ldnhat.stdiomanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

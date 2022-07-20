@@ -1,7 +1,6 @@
 package com.ldnhat.stdiomanagement.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ldnhat.stdiomanagement.common.Level;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +15,6 @@ public class SkillDto {
     private String name;
 
     @JsonProperty("level")
-    private Level level;
+    private String level;
 
 }

@@ -1,8 +1,10 @@
 package com.ldnhat.stdiomanagement.service.impl;
 
+import com.ldnhat.stdiomanagement.common.constant.Constant;
 import com.ldnhat.stdiomanagement.dto.SkillDto;
 import com.ldnhat.stdiomanagement.entity.SkillEntity;
 import com.ldnhat.stdiomanagement.entity.UserEntity;
+import com.ldnhat.stdiomanagement.exception.SkillNotFoundException;
 import com.ldnhat.stdiomanagement.mapper.SkillMapper;
 import com.ldnhat.stdiomanagement.repository.SkillRepository;
 import com.ldnhat.stdiomanagement.response.SkillResponse;
@@ -37,7 +39,8 @@ public class SkillServiceImpl implements SkillService {
         SkillResponse skillResponse = new SkillResponse();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
-                Sort.by("level").ascending() : Sort.by("level").descending();
+                Sort.by(Constant.DEFAULT_SORT_BY_OF_SKILL).ascending() :
+                Sort.by(Constant.DEFAULT_SORT_BY_OF_SKILL).descending();
 
         Pageable pageable = PageRequest.of(number, pageSize, sort);
         Page<SkillEntity> pageSkill = skillRepository.findAllByUserEntitiesId(userId, pageable);
@@ -57,12 +60,19 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public SkillDto save(SkillDto skillDto, Long id) {
         SkillEntity skillEntity = skillMapper.mapSkillDtoToSkillEntity(skillDto);
-        skillEntity = skillRepository.findByNameAndLevel(skillEntity.getName(), skillEntity.getLevel());
+        skillEntity = skillRepository.findByNameAndLevel(skillEntity.getName(), skillEntity.getLevel())
+        .orElseThrow(() -> new SkillNotFoundException("skill", "name or level"));
 
         UserEntity userEntity = userService.findById(id);
         skillEntity.getUserEntities().add(userEntity);
         userEntity.getSkillEntities().add(skillEntity);
 
+        return skillMapper.mapSkillEntityToSkillDto(skillRepository.save(skillEntity));
+    }
+
+    @Override
+    public SkillDto save(SkillDto skillDto) {
+        SkillEntity skillEntity = skillMapper.mapSkillDtoToSkillEntity(skillDto);
         return skillMapper.mapSkillEntityToSkillDto(skillRepository.save(skillEntity));
     }
 }

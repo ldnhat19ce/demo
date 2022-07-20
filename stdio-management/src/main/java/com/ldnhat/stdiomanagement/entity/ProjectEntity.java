@@ -1,7 +1,7 @@
 package com.ldnhat.stdiomanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ldnhat.stdiomanagement.common.Status;
+import com.ldnhat.stdiomanagement.common.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
