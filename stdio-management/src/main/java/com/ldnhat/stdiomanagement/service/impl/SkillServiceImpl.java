@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,11 +33,14 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public SkillResponse getSkillByUserId(int number, int pageSize, Long userId) {
+    public SkillResponse getSkillByUserId(int number, int pageSize, String sortDir, Long userId) {
         SkillResponse skillResponse = new SkillResponse();
 
-        Pageable pageable = PageRequest.of(number, pageSize);
-        Page<SkillEntity> pageSkill = skillRepository.findAllByUserEntitiesIdOrderByLevelDesc(userId, pageable);
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by("level").ascending() : Sort.by("level").descending();
+
+        Pageable pageable = PageRequest.of(number, pageSize, sort);
+        Page<SkillEntity> pageSkill = skillRepository.findAllByUserEntitiesId(userId, pageable);
 
         List<SkillEntity> listOfSkills = pageSkill.getContent();
         List<SkillDto> skillDtos = listOfSkills.stream().map(skillMapper::mapSkillEntityToSkillDto)

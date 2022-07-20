@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SkillRepository extends JpaRepository<SkillEntity, Long> {
 
-    Page<SkillEntity> findAllByUserEntitiesIdOrderByLevelDesc(Long id, Pageable pagable);
+    Page<SkillEntity> findAllByUserEntitiesId(Long id, Pageable pagable);
 
     SkillEntity findByNameAndLevel(String name, Level level);
 }

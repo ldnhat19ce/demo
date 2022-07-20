@@ -26,8 +26,10 @@ public class SkillController {
                     int pageNo,
             @RequestParam(value = "pageSize", defaultValue = Constant.DEFAULT_PAGE_SIZE, required = false)
                     int pageSize,
+            @RequestParam(value = "sortDir", defaultValue = Constant.DEFAULT_SORT_DIRECTION,
+                    required = false) String sortDir,
             @PathVariable("id") Long id){
-        return skillService.getSkillByUserId(pageNo, pageSize, id);
+        return skillService.getSkillByUserId(pageNo, pageSize, sortDir, id);
     }
 
     @PostMapping("/{id}/skills")
