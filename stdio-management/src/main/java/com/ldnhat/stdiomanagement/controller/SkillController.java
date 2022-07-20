@@ -1,7 +1,7 @@
 package com.ldnhat.stdiomanagement.controller;
 
 import com.ldnhat.stdiomanagement.dto.SkillDto;
-import com.ldnhat.stdiomanagement.response.SkillResponse;
+import com.ldnhat.stdiomanagement.response.Response;
 import com.ldnhat.stdiomanagement.service.SkillService;
 import com.ldnhat.stdiomanagement.common.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class SkillController {
     }
 
     @GetMapping("/{id}/skills")
-    public SkillResponse getSkillByUserId(
+    public Response<SkillDto> getSkillByUserId(
             @RequestParam(value = "pageNo", defaultValue = Constant.DEFAULT_PAGE_NUMBER, required = false)
                     int pageNo,
             @RequestParam(value = "pageSize", defaultValue = Constant.DEFAULT_PAGE_SIZE, required = false)

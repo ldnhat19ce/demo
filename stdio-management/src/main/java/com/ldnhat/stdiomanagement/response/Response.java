@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class Response<T> {
+public class Response<T> {
 
     private List<T> content;
     private int number;

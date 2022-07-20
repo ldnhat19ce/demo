@@ -7,7 +7,7 @@ import com.ldnhat.stdiomanagement.entity.UserEntity;
 import com.ldnhat.stdiomanagement.exception.SkillNotFoundException;
 import com.ldnhat.stdiomanagement.mapper.SkillMapper;
 import com.ldnhat.stdiomanagement.repository.SkillRepository;
-import com.ldnhat.stdiomanagement.response.SkillResponse;
+import com.ldnhat.stdiomanagement.response.Response;
 import com.ldnhat.stdiomanagement.service.SkillService;
 import com.ldnhat.stdiomanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,8 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public SkillResponse getSkillByUserId(int number, int pageSize, String sortDir, Long userId) {
-        SkillResponse skillResponse = new SkillResponse();
+    public Response<SkillDto> getSkillByUserId(int number, int pageSize, String sortDir, Long userId) {
+        Response<SkillDto> skillResponse = new Response<>();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
                 Sort.by(Constant.DEFAULT_SORT_BY_OF_SKILL).ascending() :
