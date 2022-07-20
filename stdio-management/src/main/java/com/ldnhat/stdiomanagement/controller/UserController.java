@@ -1,7 +1,9 @@
 package com.ldnhat.stdiomanagement.controller;
 
 import com.ldnhat.stdiomanagement.dto.UserDto;
+import com.ldnhat.stdiomanagement.response.SkillResponse;
 import com.ldnhat.stdiomanagement.service.UserService;
+import com.ldnhat.stdiomanagement.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
+
+
 
     @PostMapping("/add")
     public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto){

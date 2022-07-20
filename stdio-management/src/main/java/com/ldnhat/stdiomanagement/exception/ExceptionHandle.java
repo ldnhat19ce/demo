@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 
 @ControllerAdvice
@@ -20,4 +21,12 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<ErrorDetails> handleSqlIntegrityConstraintViolationException(
+            SQLIntegrityConstraintViolationException e, WebRequest webRequest){
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), e.getMessage(),
+                webRequest.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    };
 }

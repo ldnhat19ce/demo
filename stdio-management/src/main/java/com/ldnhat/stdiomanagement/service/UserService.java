@@ -12,4 +12,5 @@ public interface UserService {
     UserDto edit(UserDto userDto, Long id);
     void deleteUserById(Long id);
     UserEntity findById(Long id);
+
 }

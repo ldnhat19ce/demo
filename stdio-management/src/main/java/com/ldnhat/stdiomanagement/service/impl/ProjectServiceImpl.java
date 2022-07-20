@@ -40,7 +40,6 @@ public class ProjectServiceImpl implements ProjectService {
             UserEntity userEntity = userService.findById(it.getId());
             userEntity.getProjectEntities().add(projectEntity);
         });
-
         return projectMapper.mapProjectEntityToProjectDto(projectRepository.save(projectEntity));
     }
 
