@@ -1,7 +1,7 @@
 package com.ldnhat.stdiomanagement.service;
 
 import com.ldnhat.stdiomanagement.dto.SkillDto;
-import com.ldnhat.stdiomanagement.response.Response;
+import com.ldnhat.stdiomanagement.payload.Response;
 
 public interface SkillService {
     Response<SkillDto> getSkillByUserId(int pageNo, int pageSize, String sortDir, Long userId);

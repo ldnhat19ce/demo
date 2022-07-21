@@ -50,4 +50,10 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "skill_id"))
     @JsonIgnoreProperties(value = {"userEntities"})
     private List<SkillEntity> skillEntities = new ArrayList<>();
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
 }

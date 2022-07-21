@@ -7,7 +7,7 @@ import com.ldnhat.stdiomanagement.entity.UserEntity;
 import com.ldnhat.stdiomanagement.exception.SkillNotFoundException;
 import com.ldnhat.stdiomanagement.mapper.SkillMapper;
 import com.ldnhat.stdiomanagement.repository.SkillRepository;
-import com.ldnhat.stdiomanagement.response.Response;
+import com.ldnhat.stdiomanagement.payload.Response;
 import com.ldnhat.stdiomanagement.service.SkillService;
 import com.ldnhat.stdiomanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

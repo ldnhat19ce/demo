@@ -1,7 +1,7 @@
 package com.ldnhat.stdiomanagement.controller;
 
 import com.ldnhat.stdiomanagement.dto.SkillDto;
-import com.ldnhat.stdiomanagement.response.Response;
+import com.ldnhat.stdiomanagement.payload.Response;
 import com.ldnhat.stdiomanagement.service.SkillService;
 import com.ldnhat.stdiomanagement.common.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
