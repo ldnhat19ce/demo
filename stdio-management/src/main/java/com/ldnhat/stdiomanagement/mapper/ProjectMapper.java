@@ -22,7 +22,6 @@ public interface ProjectMapper {
     @Named("mapUserEntityInsideToUserDto")
     @Mapping(target = "userDtos", source = "userEntities")
     @Mapping(target = "status", source = "status")
-
     ProjectDto mapProjectEntityToProjectDto(ProjectEntity projectEntity);
 }
 

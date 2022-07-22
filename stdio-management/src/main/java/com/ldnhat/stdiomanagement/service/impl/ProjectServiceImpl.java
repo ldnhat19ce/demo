@@ -4,9 +4,11 @@ import com.ldnhat.stdiomanagement.dto.ProjectDto;
 import com.ldnhat.stdiomanagement.entity.ProjectEntity;
 import com.ldnhat.stdiomanagement.entity.UserEntity;
 import com.ldnhat.stdiomanagement.mapper.ProjectMapper;
+import com.ldnhat.stdiomanagement.mapper.UserMapper;
 import com.ldnhat.stdiomanagement.repository.ProjectRepository;
 import com.ldnhat.stdiomanagement.service.ProjectService;
 import com.ldnhat.stdiomanagement.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,6 +22,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final UserService userService;
     private final ProjectMapper projectMapper;
 
+    @Autowired
     public ProjectServiceImpl(ProjectRepository projectRepository,
                               UserService userService, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;

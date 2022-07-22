@@ -6,6 +6,7 @@ import com.ldnhat.stdiomanagement.entity.SkillEntity;
 import com.ldnhat.stdiomanagement.entity.UserEntity;
 import com.ldnhat.stdiomanagement.exception.SkillNotFoundException;
 import com.ldnhat.stdiomanagement.mapper.SkillMapper;
+import com.ldnhat.stdiomanagement.mapper.UserMapper;
 import com.ldnhat.stdiomanagement.repository.SkillRepository;
 import com.ldnhat.stdiomanagement.payload.Response;
 import com.ldnhat.stdiomanagement.service.SkillService;
@@ -26,12 +27,15 @@ public class SkillServiceImpl implements SkillService {
     private final SkillRepository skillRepository;
     private final SkillMapper skillMapper;
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @Autowired
-    public SkillServiceImpl(SkillRepository skillRepository, SkillMapper skillMapper, UserService userService) {
+    public SkillServiceImpl(SkillRepository skillRepository, SkillMapper skillMapper,
+                            UserService userService, UserMapper userMapper) {
         this.skillRepository = skillRepository;
         this.skillMapper = skillMapper;
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @Override
