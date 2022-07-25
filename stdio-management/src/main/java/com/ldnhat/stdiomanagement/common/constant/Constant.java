@@ -10,4 +10,10 @@ public class Constant {
     public static final String UNSUPPORTED_JWT_TOKEN = "Unsupported JWT token";
     public static final String JWT_CLAIMS_STRING_IS_EMPTY = "JWT claims string is empty.";
     public static final String USER_NOT_FOUND = "User not found with id : ";
+    public static final String JWT = "JWT";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String HEADER = "header";
+    public static final String GLOBAL = "global";
+    public static final String ACCESS_EVERYTHING = "accessEverything";
 }
+
