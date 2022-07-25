@@ -5,6 +5,7 @@ import com.ldnhat.stdiomanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +14,13 @@ import java.util.List;
 @RequestMapping("/api/member")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/list")
@@ -29,6 +32,7 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto){
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return new ResponseEntity<>(userService.save(userDto), HttpStatus.CREATED);
     }
 

@@ -1,5 +1,6 @@
 package com.ldnhat.stdiomanagement.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ldnhat.stdiomanagement.entity.SkillEntity;
 import lombok.Getter;
@@ -38,5 +39,11 @@ public class UserDto {
 
     @JsonProperty("skillEntities")
     private List<SkillEntity> skillEntities = new ArrayList<>();
+
+    @JsonProperty
+    private String username;
+
+    @JsonProperty
+    private String password;
 
 }
