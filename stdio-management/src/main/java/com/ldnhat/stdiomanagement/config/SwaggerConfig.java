@@ -3,8 +3,10 @@ package com.ldnhat.stdiomanagement.config;
 import com.ldnhat.stdiomanagement.common.constant.Constant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
@@ -23,13 +25,18 @@ public class SwaggerConfig {
                 Constant.AUTHORIZATION, Constant.HEADER);
     }
 
+    public ApiInfo apiInfo(){
+        return new ApiInfoBuilder().description("d").build();
+    }
+
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
                 .securityContexts(Collections.singletonList(security()))
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.any()) // cho phép công khai tất cả các api
                 .paths(PathSelectors.any())
                 .build();
     }

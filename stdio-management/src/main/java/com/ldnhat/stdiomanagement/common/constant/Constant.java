@@ -15,5 +15,6 @@ public class Constant {
     public static final String HEADER = "header";
     public static final String GLOBAL = "global";
     public static final String ACCESS_EVERYTHING = "accessEverything";
+    public static final String DELETE_SUCCESSFULLY = " deleted successfully";
 }
 

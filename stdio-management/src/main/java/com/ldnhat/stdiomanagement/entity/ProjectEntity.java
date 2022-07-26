@@ -30,4 +30,7 @@ public class ProjectEntity {
     @Column(name = "status")
     private Status status;
 
+    @OneToOne(mappedBy = "projectEntity")
+    private ProjectDetailEntity projectDetailEntity;
+
 }

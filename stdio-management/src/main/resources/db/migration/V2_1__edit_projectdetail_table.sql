@@ -1,0 +1,1 @@
+ALTER TABLE project_detail ADD CONSTRAINT fk_detail_project FOREIGN KEY (project_id) REFERENCES projects(id)
