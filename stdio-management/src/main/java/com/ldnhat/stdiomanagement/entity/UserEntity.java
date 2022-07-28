@@ -1,8 +1,7 @@
 package com.ldnhat.stdiomanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -11,6 +10,9 @@ import java.util.*;
 @Table(name = "users")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserEntity {
 
     @Id

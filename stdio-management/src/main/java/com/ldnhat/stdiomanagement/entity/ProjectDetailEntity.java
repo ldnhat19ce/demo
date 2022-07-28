@@ -1,8 +1,7 @@
 package com.ldnhat.stdiomanagement.entity;
 
 import com.ldnhat.stdiomanagement.common.enums.ProjectDetailStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +10,9 @@ import java.util.Date;
 @Table(name = "project_detail")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProjectDetailEntity {
 
     @Id

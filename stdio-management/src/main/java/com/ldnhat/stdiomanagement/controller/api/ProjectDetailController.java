@@ -27,14 +27,16 @@ public class ProjectDetailController {
 
     @PutMapping("/{id}/edit/{projectDetailId}")
     public ResponseEntity<ProjectDetailDto> editProjectDetail(@RequestBody ProjectDetailDto projectDetailDto,
-                                                              @PathVariable("projectDetailId") Long projectDetailId){
+                                                              @PathVariable("projectDetailId") Long projectDetailId,
+                                                              @PathVariable("id") Long id){
         return new ResponseEntity<>(projectDetailService
-                .edit(projectDetailDto, projectDetailId), HttpStatus.OK);
+                .edit(projectDetailDto, projectDetailId, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{projectId}/delete/{id}")
-    public ResponseEntity<String> deleteProjectDetail(@PathVariable("id") Long id){
-        projectDetailService.deleteById(id);
+    public ResponseEntity<String> deleteProjectDetail(@PathVariable("id") Long id,
+                                                      @PathVariable("projectId") Long projectId){
+        projectDetailService.deleteById(id, projectId);
         return new ResponseEntity<>(Constant.DELETE_SUCCESSFULLY, HttpStatus.OK);
     }
 }

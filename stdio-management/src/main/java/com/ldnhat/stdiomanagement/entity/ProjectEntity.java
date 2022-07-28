@@ -2,8 +2,7 @@ package com.ldnhat.stdiomanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ldnhat.stdiomanagement.common.enums.Status;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +12,9 @@ import java.util.List;
 @Table(name = "projects")
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProjectEntity {
 
     @Id

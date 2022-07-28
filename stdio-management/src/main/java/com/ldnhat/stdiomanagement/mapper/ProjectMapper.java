@@ -6,15 +6,22 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
 
+    ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
+
     @IterableMapping(qualifiedByName = "mapUserEntityInsideToUserDto")
     List<ProjectDto> mapProjectEntitiesToProjectDto(List<ProjectEntity> projectEntities);
 
+    @IterableMapping(qualifiedByName = "mapUserDtoToUserEntity")
+    List<ProjectEntity> mapProjectDtosToProjectEntities(List<ProjectDto> projectDtos);
+
+    @Named("mapUserDtoToUserEntity")
     @Mapping(target = "userEntities", source = "userDtos")
     @Mapping(target = "status", source = "status")
     ProjectEntity mapProjectDtoToProjectEntity(ProjectDto projectDto);

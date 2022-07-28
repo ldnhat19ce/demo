@@ -11,7 +11,6 @@ import com.ldnhat.stdiomanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -46,13 +45,12 @@ public class UserServiceImpl implements UserService {
     public UserDto edit(UserDto userDto, Long id) {
         UserEntity updateUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
-
         updateUser.setName(userDto.getName());
         updateUser.setSurname(userDto.getSurname());
         updateUser.setBirthday(userDto.getBirthday());
         updateUser.setAddress(userDto.getAddress());
-        
-        return userMapper.mapUserEntityToUserDto(userRepository.save(updateUser));
+
+        return userMapper.INSTANCE.mapUserEntityToUserDto(updateUser);
     }
 
     @Override

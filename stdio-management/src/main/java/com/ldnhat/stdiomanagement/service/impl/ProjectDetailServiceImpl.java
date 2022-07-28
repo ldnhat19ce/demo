@@ -31,22 +31,24 @@ public class ProjectDetailServiceImpl implements ProjectDetailService {
 
     @Override
     public ProjectDetailDto save(ProjectDetailDto projectDetailDto, Long id) {
-        ProjectDetailEntity projectDetailEntity = projectDetailMapper
+        ProjectDetailEntity projectDetailEntity = projectDetailMapper.INSTANCE
                 .mapProjectDetailDtoToProjectDetailEntity(projectDetailDto);
 
         ProjectEntity projectEntity = projectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("project", "id", id));
+
         projectDetailEntity.setProjectEntity(projectEntity);
-        return projectDetailMapper
-                .mapProjectDetailEntityToProjectDetailDto(
+        return projectDetailMapper.INSTANCE.mapProjectDetailEntityToProjectDetailDto(
                         projectDetailRepository.save(projectDetailEntity));
     }
 
     @Override
-    public ProjectDetailDto edit(ProjectDetailDto projectDetailDto, Long projectDetailId) {
-        ProjectDetailEntity projectDetailEntity = projectDetailMapper.
+    public ProjectDetailDto edit(ProjectDetailDto projectDetailDto, Long projectDetailId,
+                                 Long projectId) {
+        ProjectDetailEntity projectDetailEntity = projectDetailMapper.INSTANCE.
                 mapProjectDetailDtoToProjectDetailEntity(projectDetailDto);
-
+        projectRepository.findById(projectId).orElseThrow(() ->
+                new ResourceNotFoundException("project", "id", projectId));
         ProjectDetailEntity updateProjectDetail = projectDetailRepository.findById(projectDetailId)
                 .orElseThrow(() -> new ResourceNotFoundException("project detail", "id", projectDetailId));
 
@@ -55,18 +57,17 @@ public class ProjectDetailServiceImpl implements ProjectDetailService {
         updateProjectDetail.setTimeEnd(projectDetailEntity.getTimeEnd());
         updateProjectDetail.setTechnical(projectDetailEntity.getTechnical());
 
-        return projectDetailMapper.mapProjectDetailEntityToProjectDetailDto(
-                projectDetailRepository.save(updateProjectDetail)
+        return projectDetailMapper.INSTANCE.mapProjectDetailEntityToProjectDetailDto(
+                updateProjectDetail
         );
     }
 
     @Override
-    public ProjectDetailDto findByProjectId(Long id) {
-        return null;
-    }
+    public void deleteById(Long id, Long projectId) {
 
-    @Override
-    public void deleteById(Long id) {
+        projectRepository.findById(projectId).orElseThrow(() ->
+                new ResourceNotFoundException("project ", "id", projectId));
+
         ProjectDetailEntity projectDetailEntity = projectDetailRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("project detail", "id", id));
         projectDetailRepository.delete(projectDetailEntity);

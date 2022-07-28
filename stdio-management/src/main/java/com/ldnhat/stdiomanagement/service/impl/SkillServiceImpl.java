@@ -18,10 +18,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class SkillServiceImpl implements SkillService {
 
     private final SkillRepository skillRepository;
@@ -50,7 +52,7 @@ public class SkillServiceImpl implements SkillService {
         Page<SkillEntity> pageSkill = skillRepository.findAllByUserEntitiesId(userId, pageable);
 
         List<SkillEntity> listOfSkills = pageSkill.getContent();
-        List<SkillDto> skillDtos = listOfSkills.stream().map(skillMapper::mapSkillEntityToSkillDto)
+        List<SkillDto> skillDtos = listOfSkills.stream().map(skillMapper.INSTANCE::mapSkillEntityToSkillDto)
                 .collect(Collectors.toList());
 
         skillResponse.setContent(skillDtos);

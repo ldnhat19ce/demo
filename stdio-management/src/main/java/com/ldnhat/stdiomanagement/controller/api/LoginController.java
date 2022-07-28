@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("LoginApi")
 public class LoginController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider provider;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    public LoginController(AuthenticationManager authenticationManager, JwtTokenProvider provider) {
-        this.authenticationManager = authenticationManager;
-        this.provider = provider;
-    }
+    private JwtTokenProvider provider;
+
 
     @PostMapping("/login")
     public LoginResponseDto authenticationUser(@RequestBody LoginRequestDto requestDto){
